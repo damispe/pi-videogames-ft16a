@@ -1,10 +1,10 @@
-const {Videogame} = require('../db.js');
+const { Videogame } = require('../db.js');
 const axios = require('axios');
-const {v4: uuidv4} = require('uuid');
-const {API_KEY, API_GAMES} = require('../../consts.js');
+const { v4: uuidv4 } = require('uuid');
+const { API_KEY, API_GAMES } = require('../../consts.js');
 
 //Crear videogame:
-async function addGame (req, res) {
+async function addGame (req, res){
   const id = uuidv4();
   const game = { ...req.body, id };
   try {
@@ -26,8 +26,7 @@ async function addGame (req, res) {
         });
       }
     } catch(e){
-      console.log(e);
-      res.send({ error: 500, msg: 'a field is empty' });
+      res.status(500).send('Something went wrong');
     }
   }
   
@@ -54,7 +53,7 @@ async function addGame (req, res) {
     }
 }
 
-//busqueda por ID en la DB:
+// busqueda por ID en la DB:
 // async function getAddedGamesId (req, res){
 //   const IdDbGames = await Videogame.findAll();
 //   const matchID = IdDbGames.filter((req) => req.params === Videogame[id]);
