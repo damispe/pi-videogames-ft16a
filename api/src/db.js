@@ -36,11 +36,11 @@ const { Videogame, Genre } = sequelize.models;
 // Product.hasMany(Reviews);
 Videogame.belongsToMany(Genre, {
   through: 'videogame_genre',
-  timestamps: false,
+  timeStamps: false,
 });
 Genre.belongsToMany(Videogame, {
   through: 'videogame_genre',
-  timestamps: false,
+  timeStamps: false,
 });
 
 module.exports = {

@@ -1,9 +1,9 @@
 const {Videogame} = require('../db.js');
 const axios = require('axios');
 const {v4: uuidv4} = require('uuid');
-const {API_KEY, API_GAME} = require('../../consts.js');
+const {API_KEY, API_GAMES} = require('../../consts.js');
 
-//Crear videogame
+//Crear videogame:
 async function addGame (req, res) {
   const id = uuidv4();
   const game = { ...req.body, id };
@@ -31,21 +31,21 @@ async function addGame (req, res) {
     }
   }
   
-  //traer juegos de la DB:
+  //desde de la DB:
   async function getAddedGames (req, res){
     const dbGames = await Videogame.findAll();
     return dbGames;
   }
 
-  //traer videogames de la API y de la DB:
+  //desde la API y la DB:
   async function getGames (req, res){
     if (req.query.name){
-        const videogames = await (axios.get(`${API_GAME}?search=${req.query.name}&key=${API_KEY}`)); 
+        const videogames = await (axios.get(`${API_GAMES}?search=${req.query.name}&key=${API_KEY}`)); 
         if (videogames.data.results[0]) return res.json(videogames.data.results);
-        return res.status(404).send('Not found');
+        return res.status(404).send('Videogames not found');
     } else {
         try {
-            const videogames = await (axios.get(`${API_GAME}?key=${API_KEY}`));
+            const videogames = await (axios.get(`${API_GAMES}?key=${API_KEY}`));
             const dbVideogames = await getAddedGames();
             return res.json(dbVideogames.concat(videogames.data.results));
         } catch (error){
@@ -54,8 +54,25 @@ async function addGame (req, res) {
     }
 }
 
+//busqueda por ID en la DB:
+// async function getAddedGamesId (req, res){
+//   const IdDbGames = await Videogame.findAll();
+//   const matchID = IdDbGames.filter((req) => req.params === Videogame[id]);
+//     return matchID;
+// }
+
+//videogame por ID en API:
+async function getGamesById (req, res){
+  try {
+      const gamesId = await axios.get(`${API_GAMES}/${req.params.idVideogame}?key=${API_KEY}`);
+        return res.json(gamesId.data);
+  } catch {
+      return res.status(404).send('ID not found');
+  }
+}
 
 module.exports = {
     getGames,
     addGame,
+    getGamesById,
 };
