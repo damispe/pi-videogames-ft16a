@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     release_date:{
@@ -26,9 +26,13 @@ module.exports = (sequelize) => {
       type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: false,
     },
+    genre: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: false,
+    },
   },
   {
-    timeStamps: false,
+    timestamps: false,
     freezeTableName: true,
   });
 };

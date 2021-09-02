@@ -8,13 +8,13 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       primaryKey: true,
     },
-    name: {
+    genre_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
-    timeStamps: false,
+    timestamps: false,
     freezeTableName: true,
   });
 };

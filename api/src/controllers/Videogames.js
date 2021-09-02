@@ -1,4 +1,4 @@
-const { Videogame } = require('../db.js');
+const { Videogame, Genre } = require('../db.js');
 const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
 const { API_KEY, API_GAMES } = require('../../consts.js');
@@ -15,9 +15,14 @@ async function addGame (req, res){
           description: game.description,
           release_date: game.releaseDate,
           rating: game.rating,
-          platforms: game.platforms, 
-        },
+          platforms: game.platforms,
+          genre: game.genre,
+        }
       });
+      let dbGenre = await Genre.findAll({
+        where: {genre_name: game.genre}
+      });
+      games.addGenre(dbGenre);
       if(games){
         let aux = [games];
         return res.json({
@@ -37,6 +42,7 @@ async function addGame (req, res){
   }
 
   //desde la API y la DB:
+  //hacer que traiga los primeros 15 cuando se busca por query.name
   async function getGames (req, res){
     if (req.query.name){
         const videogames = await (axios.get(`${API_GAMES}?search=${req.query.name}&key=${API_KEY}`)); 
@@ -53,20 +59,19 @@ async function addGame (req, res){
     }
 }
 
-// busqueda por ID en la DB:
-// async function getAddedGamesId (req, res){
-//   const IdDbGames = await Videogame.findAll();
-//   const matchID = IdDbGames.filter((req) => req.params === Videogame[id]);
-//     return matchID;
-// }
-
-//videogame por ID en API:
+//videogame por ID en API y DB:
+//trae de la DB pero no de la API
 async function getGamesById (req, res){
   try {
+    const dbGamesId = await Videogame.findByPk(req.params.idVideogame);
+    if (dbGamesId){
+      return res.json(dbGamesId);
+    } else {
       const gamesId = await axios.get(`${API_GAMES}/${req.params.idVideogame}?key=${API_KEY}`);
-        return res.json(gamesId.data);
+      return res.json(gamesId.data); 
+    }
   } catch {
-      return res.status(404).send('ID not found');
+         return res.status(404).send('ID not found');
   }
 }
 
@@ -74,4 +79,5 @@ module.exports = {
     getGames,
     addGame,
     getGamesById,
+    //getGamesByName,
 };

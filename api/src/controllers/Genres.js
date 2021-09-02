@@ -7,7 +7,7 @@ async function addGenres(genreName){
     const id = uuidv4();
     await Genre.create({
         id,
-        name: genreName
+        genre_name: genreName
     });
 }
 
