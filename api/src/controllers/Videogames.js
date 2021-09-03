@@ -41,7 +41,7 @@ async function addGame (req, res){
     return dbGames;
   }
 
-  //desde la API y la DB y cuando se pasa un name por query:
+  //desde la API y la DB y cuando se pasa query.name:
   async function getGames (req, res){
     if (req.query.name){
         const videogames = await (axios.get(`${API_GAMES}?search=${req.query.name}&key=${API_KEY}`)); 
@@ -60,7 +60,7 @@ async function addGame (req, res){
 
 //videogame por ID en API y DB:
 async function getGamesById (req, res) {
-  let n = 0;
+  let n1 = 0;
   let n2 = 0;
   try {
     const gameId = await Videogame.findByPk(req.params.idVideogame);
@@ -69,7 +69,7 @@ async function getGamesById (req, res) {
     }
   }
   catch {
-    n = 1;
+    n1 = 1;
   }
   try {
     const gameId = await axios.get(`${API_GAMES}/${req.params.idVideogame}?key=${API_KEY}`);
@@ -80,7 +80,7 @@ async function getGamesById (req, res) {
   catch {
     n2 = 1;
   }
-  if (n !== 0 && n2 !== 0){
+  if (n1 !== 0 && n2 !== 0){
     return res.status(404).send('ID not found');
   }
 }
