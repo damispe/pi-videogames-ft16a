@@ -41,12 +41,11 @@ async function addGame (req, res){
     return dbGames;
   }
 
-  //desde la API y la DB:
-  //hacer que traiga los primeros 15 cuando se busca por query.name
+  //desde la API y la DB y cuando se pasa un name por query:
   async function getGames (req, res){
     if (req.query.name){
         const videogames = await (axios.get(`${API_GAMES}?search=${req.query.name}&key=${API_KEY}`)); 
-        if (videogames.data.results[0]) return res.json(videogames.data.results);
+        if (videogames.data.results[0]) return res.json(videogames.data.results.slice(0, 15));
         return res.status(404).send('Videogames not found');
     } else {
         try {
@@ -60,18 +59,29 @@ async function addGame (req, res){
 }
 
 //videogame por ID en API y DB:
-//trae de la DB pero no de la API
-async function getGamesById (req, res){
+async function getGamesById (req, res) {
+  let n = 0;
+  let n2 = 0;
   try {
-    const dbGamesId = await Videogame.findByPk(req.params.idVideogame);
-    if (dbGamesId){
-      return res.json(dbGamesId);
-    } else {
-      const gamesId = await axios.get(`${API_GAMES}/${req.params.idVideogame}?key=${API_KEY}`);
-      return res.json(gamesId.data); 
+    const gameId = await Videogame.findByPk(req.params.idVideogame);
+    if (gameId){
+      return res.json(gameId);
     }
-  } catch {
-         return res.status(404).send('ID not found');
+  }
+  catch {
+    n = 1;
+  }
+  try {
+    const gameId = await axios.get(`${API_GAMES}/${req.params.idVideogame}?key=${API_KEY}`);
+    if (gameId){
+      return res.json(gameId.data);
+    }
+  }
+  catch {
+    n2 = 1;
+  }
+  if (n !== 0 && n2 !== 0){
+    return res.status(404).send('ID not found');
   }
 }
 
@@ -79,5 +89,4 @@ module.exports = {
     getGames,
     addGame,
     getGamesById,
-    //getGamesByName,
 };
