@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_VIDEOGAMES } from './consts';
+import { GET_VIDEOGAMES } from './types';
 import {GAMES_URL} from '../../consts';
 
 function getVideogames(){
