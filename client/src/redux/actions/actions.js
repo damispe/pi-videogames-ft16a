@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { GET_VIDEOGAMES } from './consts';
-import {GAMES_URL} from '../consts';
+import {GAMES_URL} from '../../consts';
 
 function getVideogames(){
     return function(dispatch){
