@@ -59,6 +59,7 @@ async function addGame (req, res){
 }
 
 //videogame por ID en API y DB:
+//falta traer generos asociados
 async function getGamesById (req, res) {
   let n1 = 0;
   let n2 = 0;
