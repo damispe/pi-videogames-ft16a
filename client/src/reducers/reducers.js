@@ -1,16 +1,18 @@
-import { GET_VIDEOGAMES } from "../actions/consts";
+import  GET_VIDEOGAMES  from '../actions/actions';
 
 var initialState = {
     videogames : []
 }
 
-export default function reducer(state = initialState, action){
+function rootReducer(state = initialState, action){
     switch(action.type){
         case GET_VIDEOGAMES:
             return {
                 ...state,
-                videogames: [...action.payload]
+                videogames: action.payload
             }
         default: return state;
     }
 }
+
+export default rootReducer;

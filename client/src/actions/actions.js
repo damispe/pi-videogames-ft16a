@@ -1,14 +1,17 @@
-import { GET_VIDEOGAMES } from "./consts";
+import axios from 'axios';
+import { GET_VIDEOGAMES } from './consts';
+import {GAMES_URL} from '../consts';
 
-export function getVideogames(){
+function getVideogames(){
     return function(dispatch){
-        fetch('http://localhost:3001/videogames')
-        .then(response => response.json())
-        .then(json => {
+        return axios.get(`${GAMES_URL}`)
+        .then((games) => {
             dispatch({
                 type: GET_VIDEOGAMES,
-                payload: json
+                payload: games
             })
         })
     }
-}
+};
+
+export default getVideogames;
