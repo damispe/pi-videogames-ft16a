@@ -1,0 +1,34 @@
+.landingBackground {
+    display: flex;
+    background-image: url("https://www.bandt.com.au/information/uploads/2020/09/iStock-1170073827-1260x840.jpg");
+    background-size: cover;
+    background-position: absolute;
+    background-attachment: fixed;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    width: 100vw;
+    color: black;
+}
+
+.landingButton {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(2, 2, 2) !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: rgb(67, 146, 97);
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    position: down;
+}
+
+.landingTitle {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position:initial;
+    margin: 0 0 .5em;
+    padding: 0;
+}

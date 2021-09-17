@@ -5,6 +5,8 @@ import { getVideogames } from '../redux/actions/actions';
 import NavBar from './navBar';
 import Videogames from './videogames';
 import Pagination from './pagination';
+import '../styles/home.css';
+import '../styles/gameCard.css';
 
 export default function Filter(){
 
@@ -51,11 +53,12 @@ export default function Filter(){
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return(
-        <div>
+        <div className='background'>
             <div>
                 <NavBar/>
             </div>
             <Videogames
+            className='card'
             prop={currentGames}
             />
             <Pagination

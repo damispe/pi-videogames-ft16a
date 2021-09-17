@@ -5,6 +5,7 @@ import { getVideogames, getGenres } from '../redux/actions/actions';
 import Videogames from './videogames';
 import NavBar from './navBar';
 import Pagination from './pagination';
+import '../styles/home.css';
 
 export default function Home(){
 
@@ -73,11 +74,11 @@ export default function Home(){
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div>
+        <div className='background'>
             <div>
                 <NavBar/>
             </div>
-            <div>
+            <div className='select'>
                 <select onChange={(e) => handleOrderSelect(e.target.value)}>
                     <option disabled selected hidden>Filters...</option>
                     <option value={'name asc'}>From A-Z</option>
@@ -100,11 +101,13 @@ export default function Home(){
                 prop={currentGames}
                 />
             </div>
-            <Pagination
-            gamesPerPage={gamesPerPage}
-            totalGames={videogames.length}
-            paginate={paginate}
-            />
+            <div className='pagination'>
+                <Pagination
+                gamesPerPage={gamesPerPage}
+                totalGames={videogames.length}
+                paginate={paginate}
+                />
+            </div>
         </div>
     );
 }

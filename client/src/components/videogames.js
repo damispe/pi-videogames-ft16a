@@ -1,6 +1,8 @@
 import React from 'react';
 import defaultImage from '../img/defaultImage.jpg';
 import Videogame from './videogame';
+import '../styles/gameCard.css';
+
 
 export default function Videogames({prop}){
 
@@ -15,6 +17,7 @@ export default function Videogames({prop}){
                 return <ul>
                             <li>
                                 <Videogame
+                                className='card'
                                 id={g.id}
                                 name={g.name}
                                 background_image={g.background_image}

@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createGame } from '../redux/actions/actions';
 import NavBar from './navBar';
+import '../styles/home.css';
+import '../styles/addGame.css';
 
 function validate(input){
     let errors = {};
@@ -88,98 +90,108 @@ export default function AddGame(){
     }
 
     return (
-        <div>
+        <div className='background'>
             <NavBar/>
             <Link to='/home'>
                 <button>Back</button>
             </Link>
-            <h1>Create Videogame</h1>
-            <form onSubmit={(e) => handleFormSubmit(e)}>
-                <div>
-                    <label>Name:</label>
-                    <input type='text'
-                    value={input.name}
-                    name='name'
-                    onChange={handleChange}
-                    />
-                    {errors.name && (
-                        <p>{errors.name}</p>
-                    )}
-                </div>
-                <div>
-                    <label>Description:</label>
-                    <input type='text'
-                    value={input.description}
-                    name='description'
-                    onChange={handleChange}
-                    />
-                    {errors.description && (
-                        <p>{errors.description}</p>
-                    )}
-                </div>
-                <div>
-                    <label>Release date:</label>
-                    <input type='date'
-                    value={input.release_date}
-                    name='release_date'
-                    onChange={handleChange}
-                    />
-                    {errors.release_date && (
-                        <p>{errors.release_date}</p>
-                    )}
-                </div>
-                <div>
-                    <label>Rating:</label>
-                    <input type='number'
-                    value={input.rating}
-                    name='rating'
-                    onChange={handleChange}
-                    />
-                    {errors.rating && (
-                        <p>{errors.rating}</p>
-                    )}
-                </div>
-                <div>
-                    <label>Platforms:</label>
-                    <select onChange={(e) => handlePlatformSelect(e)}>
-                        <option>PC</option>
-                        <option>PlayStation</option>
-                        <option>Xbox</option>
-                        <option>Nintendo</option>
-                        <option>iOS</option>
-                        <option>Android</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Genres:</label>
-                    <select onChange={(e) => handleGenreSelect(e)}>
-                        {genres.map((g) => (
-                            <option value={g.genre_name}>
-                                {g.genre_name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <h4>Selected platforms:</h4>
-                    {input.platforms.map(p => 
-                        <div>
-                            <p>{p}</p>
-                            <button className='xButton' onClick={() => handlePlatformsDelete(p)}>x</button>
-                        </div>
+            <h1 className='form'>Create Videogame</h1>
+            <div className='form'>
+                <form onSubmit={(e) => handleFormSubmit(e)} className='form'>
+                    <div>
+                        <label>Name:</label>
+                        <input
+                        className='forminput'
+                        type='text'
+                        value={input.name}
+                        name='name'
+                        onChange={handleChange}
+                        />
+                        {errors.name && (
+                            <p>{errors.name}</p>
                         )}
-                </div>
-                <div>
-                    <h4>Selected genres:</h4>
-                    {input.genres.map(g => 
-                        <div>
-                            <p>{g}</p>
-                            <button className='xButton' onClick={() => handleGenresDelete(g)}>x</button>
-                        </div>
+                    </div>
+                    <div>
+                        <label>Description:</label>
+                        <input
+                        className='forminput'
+                        type='text'
+                        value={input.description}
+                        name='description'
+                        onChange={handleChange}
+                        />
+                        {errors.description && (
+                            <p>{errors.description}</p>
                         )}
-                </div> 
-                <button type='submit'>Create</button>
-            </form>
+                    </div>
+                    <div>
+                        <label>Release date:</label>
+                        <input
+                        className='forminput'
+                        type='date'
+                        value={input.release_date}
+                        name='release_date'
+                        onChange={handleChange}
+                        />
+                        {errors.release_date && (
+                            <p>{errors.release_date}</p>
+                        )}
+                    </div>
+                    <div>
+                        <label>Rating:</label>
+                        <input
+                        className='forminput'
+                        type='number'
+                        value={input.rating}
+                        name='rating'
+                        onChange={handleChange}
+                        />
+                        {errors.rating && (
+                            <p>{errors.rating}</p>
+                        )}
+                    </div>
+                    <div>
+                        <label>Platforms:</label>
+                        <select className='forminput' onChange={(e) => handlePlatformSelect(e)}>
+                            <option>PC</option>
+                            <option>PlayStation</option>
+                            <option>Xbox</option>
+                            <option>Nintendo</option>
+                            <option>iOS</option>
+                            <option>Android</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Genres:</label>
+                        <select className='forminput' onChange={(e) => handleGenreSelect(e)}>
+                            {genres.map((g) => (
+                                <option value={g.genre_name}>
+                                    {g.genre_name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <h4>Selected platforms:</h4>
+                        {input.platforms.map(p => 
+                            <div>
+                                <p>{p}</p>
+                                <button className='xButton' onClick={() => handlePlatformsDelete(p)}>x</button>
+                            </div>
+                            )}
+                    </div>
+                    <div>
+                        <h4>Selected genres:</h4>
+                        {input.genres.map(g => 
+                            <div>
+                                <p>{g}</p>
+                                <button className='xButton' onClick={() => handleGenresDelete(g)}>x</button>
+                            </div>
+                            )}
+                    </div> 
+                    <button className='formbutton' type='submit'>Create</button>
+                </form>
+            </div>
         </div>
     );
 }

@@ -4,6 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 import { getGamesById } from '../redux/actions/actions';
 import defaultImage from '../img/defaultImage.jpg';
 import NavBar from './navBar';
+import '../styles/home.css';
+import '../styles/gameCard.css';
 
 export default function GameDetail(){
 
@@ -31,22 +33,22 @@ export default function GameDetail(){
     }
 
     return(
-        <div>
+        <div className='background'>
             <div>
                 <NavBar/>
             </div>
-            <div>
+            <div className='center'>
                 <h1>{detail.name}</h1>
-                <img src={detail.background_image? detail.background_image : defaultImage} alt=''/>
-                <div>
-                    {genresArr.map(g => 
-                        <p>{g}</p>
-                        )}
+                <img className='card' src={detail.background_image? detail.background_image : defaultImage} alt=''/>
+                <div>Genres:
+                    {genresArr.map(g =>
+                    <Link to={`/filter/${g}`}>{g}</Link>
+                    )}
                 </div>
-                <div>{detail.rating}</div>
+                <div>Rating: {detail.rating}</div>
                 <p>{detail.description_raw ? detail.description_raw : detail.description}</p>
-                <div>{detail.released? detail.released : detail.release_date}</div>
-                <div>
+                <div>Release date: {detail.released? detail.released : detail.release_date}</div>
+                <div>Platforms:
                     {platformsArr.map(p =>
                         <p>{p}</p>
                         )}

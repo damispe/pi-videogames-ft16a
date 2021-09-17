@@ -1,0 +1,33 @@
+.card{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 280px;
+    height: 400px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: black;
+    border-radius: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(49, 87, 74);
+    transition: 1s ease;
+    text-decoration: none;
+}
+
+.title{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.center{
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

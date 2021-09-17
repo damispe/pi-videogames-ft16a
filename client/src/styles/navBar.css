@@ -1,0 +1,33 @@
+.nav {
+    height: 56px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #010503;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.navbutton {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(2, 2, 2) !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: rgb(67, 146, 97);
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    position: down;
+}
+
+.searchbutton {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: seagreen;
+    border: none;
+}
