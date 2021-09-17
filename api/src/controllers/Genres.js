@@ -13,7 +13,7 @@ async function addGenres(genreName){
 
 async function getGenres (req, res){
     try {
-        const genresDB = await Genre.findAll();
+        let genresDB = await Genre.findAll();
         if (!genresDB[0]){
             const genresAPI = await axios.get(`${API_GENRES}?key=${API_KEY}`);
             await Promise.all(genresAPI.data.results.map(async (g) => {

@@ -20,14 +20,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     rating: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     },
     platforms: {
       type: DataTypes.ARRAY(DataTypes.TEXT),
-      allowNull: false,
-    },
-    genre: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
   },
