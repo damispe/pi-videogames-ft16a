@@ -52,8 +52,19 @@ async function addGame (req, res){
   async function getGames (req, res){
     if (req.query.name){
         const videogames = await (axios.get(`${API_GAMES}?search=${req.query.name}&key=${API_KEY}`));
-        if (videogames.data.results[0]) return res.json(videogames.data.results.slice(0, 15));
-        return res.status(404).send('Videogames not found');
+        const videogamesDb = await Videogame.findAll({
+          where: {name: req.query.name}
+        });
+        const apiVideogame = videogames.data.results.map(v => {
+          return {
+            id: v.id,
+            name: v.name,
+            background_image: v.background_image,
+            rating: v.rating,
+            genres: v.genres.map((v) => v.name)
+          }
+        })
+            return res.json(videogamesDb.concat(videogames.data.results[0]))
     } else {
         try {
             const firstGet = await (axios.get(`${API_GAMES}?key=${API_KEY}`));
