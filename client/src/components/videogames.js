@@ -1,36 +1,28 @@
-import { useEffect, useState } from 'react';
-import {GAMES_URL} from '../consts';
+import React from 'react';
+import defaultImage from '../img/defaultImage.jpg';
+import Videogame from './videogame';
 
-//muestra de a 15 juegos por pag
-export default function Videogames(){
-    const [games, setGames] = useState([]);
-    const [error, setError] = useState(null);
+export default function Videogames({prop}){
 
-    useEffect(() => {
-        fetch(`${GAMES_URL}`)
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setGames(result);
-            },
-            (error) => {
-                setError(error);
-            }
-        )
-    }, [])
-
-    if (error){
-        return <div>Error: {error.msg}</div>;
-    }
-    else {
-        return (
-            <ul>
-                {games.map(games => (
-                    <li key={games.id}>
-                    {games.name}
-                    </li>
-                ))}
-            </ul>
-        );
-    }
+    return(
+        <div>
+            {prop && prop.map(g => {
+                if (g?.Genres){
+                    g.background_image = defaultImage;
+                    g.genres = [];
+                    g?.Genres?.map(gen => g?.genres.push(gen.genre_name));
+                }
+                return <ul>
+                            <li>
+                                <Videogame
+                                id={g.id}
+                                name={g.name}
+                                background_image={g.background_image}
+                                genres={g.genres}
+                                />
+                            </li>
+                       </ul>
+            })}
+        </div>
+    );
 }

@@ -2,7 +2,7 @@
  const GAMES_URL = BASE_URL + '/videogames';
  const SEARCH_URL = BASE_URL + '/videogames?name=';
  const ADD_GAME_URL = BASE_URL + '/videogame';
- const DETAILS_URL = BASE_URL + '/videogame/:idVideogame';
+ const DETAILS_URL = BASE_URL + '/videogame/';
  const GENRES_URL = BASE_URL + '/genres';
 
 export {

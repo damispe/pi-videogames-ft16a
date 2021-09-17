@@ -3,20 +3,24 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Landing from './components/landing';
 import Home from './components/home';
 import AddGame from './components/addGame';
-import Videogame from './components/videogame';
-import NavBar from './components/navBar';
+import GameDetail from './components/gameDetail';
+import About from './components/about';
+import Filter from './components/filter';
 
 function App() {
+
   return (
     <BrowserRouter>
       <div>
         <Route exact path='/' component={Landing}/>
       </div>
       <div>
-        <NavBar/>
-        <Route exact path='/Home' component={Home}/>
-        <Route exact path='/Videogame' component={AddGame}/>
-        <Route exact path='/GameDetail' component={Videogame}/>
+        <Route exact path='/home' component={Home}/>
+        <Route path='/home/:attribute/:order' component={Home}/>
+        <Route path='/filter/:attribute' component={Filter}/>
+        <Route path='/videogame' component={AddGame}/>
+        <Route path='/gameDetail/:idVideogame' component={GameDetail}/>
+        <Route path='/about' component={About}/>
       </div>
     </BrowserRouter>
   );
